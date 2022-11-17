@@ -3,11 +3,7 @@ def sum_list(mylist):
     risultato = 0
     for item in mylist:
         risultato = risultato + item
+    if mylist == []:
+        return None
     return risultato
-
-mylist = [0,0,0]
-if mylist == []:
-    somma = None
-else:
-    somma = sum_list(mylist)
-print('La somma dei valori è: {}'.format(somma))
+    
