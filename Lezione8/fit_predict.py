@@ -39,9 +39,9 @@ class TestIncrementModel(unittest.TestCase):
         except Exception as e:
             print('ho avuto un Errore Generico del tipo {}'.format(e))
 
-# test
-#increment_model = IncrementModel()
-#print('{}'.format(increment_model.predict([50, 52, 60])))
+# test all
+increment_model = IncrementModel()
+print('{}'.format(increment_model.predict([50, 52, 60])))
 
 #chiamare unit test
 test_increment_model = TestIncrementModel()

@@ -9,6 +9,7 @@ class Model():
 
 class IncrementModel(Model):
     def predict(self, data): 
+        # checks non implementati
         prev_value = None
         somma_incrementi = 0
         for i, item in enumerate(data):
