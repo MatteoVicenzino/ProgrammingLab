@@ -1,4 +1,4 @@
-#import unittest
+import unittest
 
 class Model():
     def fit(self, data):
@@ -11,6 +11,15 @@ class Model():
 
 class IncrementModel(Model):
     def predict(self, data): 
+        
+        # check su data
+        if type(data) is not list:
+            raise Exception('data is not a list')
+            return None
+        if len(data) < 3:
+            raise Exception('Not enough data to predict')
+            return None
+        
         prev_value = None
         somma_incrementi = 0
         for i, item in enumerate(data):
@@ -19,22 +28,22 @@ class IncrementModel(Model):
             else: #se sono in un elemento diverso da primo
                 incremento = item - prev_value
                 somma_incrementi = somma_incrementi + incremento 
-                
             prev_value = item
-        
         prediction = data[-1] + somma_incrementi/i
         return prediction
 
 
-
-
-# unit test
+        # unit test
 class TestIncrementModel(unittest.TestCase):
     
     def TestIncrementModel(self):
         try:
             increment_model = IncrementModel()
+            self.assertEqual(increment_model.predict([]), None)
+            self.assertEqual(increment_model.predict([50]), None)
             self.assertEqual(increment_model.predict([50, 52, 60]), 65)
+            self.assertEqual(increment_model.predict([50, 52, 60, 65]), 70)
+            self.assertEqual(increment_model.predict([0, 0, 0, 0]), 0)
             print('OK')
         except Exception as e:
             print('ho avuto un Errore Generico del tipo {}'.format(e))

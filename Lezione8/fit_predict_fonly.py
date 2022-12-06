@@ -9,7 +9,12 @@ class Model():
 
 class IncrementModel(Model):
     def predict(self, data): 
-        # checks non implementati
+        # check su data
+        if type(data) is not list:
+            raise Exception('data is not a list')
+        if len(data) < 3:
+            raise Exception('Not enough data to predict')
+
         prev_value = None
         somma_incrementi = 0
         for i, item in enumerate(data):
@@ -18,8 +23,6 @@ class IncrementModel(Model):
             else: #se sono in un elemento diverso da primo
                 incremento = item - prev_value
                 somma_incrementi = somma_incrementi + incremento 
-                
             prev_value = item
-        
         prediction = data[-1] + somma_incrementi/i
         return prediction
