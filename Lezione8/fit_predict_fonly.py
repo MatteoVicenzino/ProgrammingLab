@@ -11,9 +11,9 @@ class IncrementModel(Model):
     def predict(self, data): 
         # check su data
         if type(data) is not list:
-            raise Exception('data is not a list')
+            raise TypeError('data is not a list')
         if len(data) < 3:
-            raise Exception('Not enough data to predict')
+            raise TypeError('Not enough data to predict')
 
         prev_value = None
         somma_incrementi = 0

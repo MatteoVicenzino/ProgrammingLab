@@ -17,7 +17,7 @@ class IncrementModel(Model):
             raise Exception('data is not a list')
             return None
         if len(data) < 3:
-            raise Exception('Not enough data to predict')
+            raise TypeError('Not enough data to predict')
             return None
         
         prev_value = None
