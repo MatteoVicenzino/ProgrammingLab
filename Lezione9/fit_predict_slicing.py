@@ -1,4 +1,5 @@
 import unittest
+from matplotlib import pyplot
 
 def div_data(data):
     listone = []
@@ -66,3 +67,9 @@ increment_model = FitIncrementModel()
 risultato = increment_model.predict([8, 19, 31, 41, 50, 52, 60])
 
 print('{}'.format(risultato))
+
+data = [8,19,31,41,50,52,60]
+prediction = 68
+pyplot.plot(data + [prediction], color='tab:red')
+pyplot.plot(data, color='tab:blue')
+pyplot.show()
