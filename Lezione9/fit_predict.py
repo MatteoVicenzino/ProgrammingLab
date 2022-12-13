@@ -29,7 +29,7 @@ class IncrementModel(Model):
                 incremento = item - prev_value
                 somma_incrementi = somma_incrementi + incremento 
             prev_value = item
-        media =  + somma_incrementi/i
+        media = somma_incrementi/i
         
         return media
 
@@ -46,31 +46,10 @@ class FitIncrementModel(IncrementModel):
         fitted = self.fit(data1) #chiedo la media delgi incrementi della prima lista e la salvo in fitted
         predicted = self.media_incrementi(data2) #chiedo la media delgi incrementi della seconda lista e la salvo in predicted
         return (data2[-1] + (fitted + predicted)/2) #faccio la media aritmetica delle due medie incrementi e la aggiungo alle vendite dell'ultimo mese
-    
 
-# unit test
-"""
-class TestIncrementModel(unittest.TestCase):
-    
-    def TestIncrementModel(self):
-        try:
-            increment_model = IncrementModel()
-            self.assertEqual(increment_model.predict([]), None)
-            self.assertEqual(increment_model.predict([50]), None)
-            self.assertEqual(increment_model.predict([50, 52, 60]), 65)
-            self.assertEqual(increment_model.predict([50, 52, 60, 65]), 70)
-            self.assertEqual(increment_model.predict([0, 0, 0, 0]), 0)
-            print('OK')
-        except Exception as e:
-            print('ho avuto un Errore Generico del tipo {}'.format(e))
-"""
+        
 # test all
 increment_model = FitIncrementModel()
-#global_avg_increment = increment_model.fit([8, 19, 31, 41])
 risultato = increment_model.predict([8, 19, 31, 41], [50, 52, 60])
 
 print('{}'.format(risultato))
-
-#chiamare unit test
-#test_increment_model = TestIncrementModel()
-#test_increment_model.TestIncrementModel()

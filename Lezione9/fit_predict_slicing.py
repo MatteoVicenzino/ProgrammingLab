@@ -1,5 +1,13 @@
 import unittest
 
+def div_data(data):
+    listone = []
+    listina1 = data[0:-3]
+    listone.append(listina1)
+    listina2 = data[-3:]
+    listone.append(listina2)
+    return listone
+
 class Model():
     def fit(self, data):
         # Fit non implementanto nella classe base
@@ -42,7 +50,19 @@ class FitIncrementModel(IncrementModel):
     def fit(self, data):
         return self.media_incrementi(data) # ritorna la media degli incrementi della prima lista
         
-    def predict(self, data1, data2):
+    def predict(self, data):
+        # chiamo la funzione per fare lo slicing(sta fuori da tutto)
+        listone = div_data(data) 
+        # salvo gli elementi di listone in data1 e data2 per essere usate per fitted e predicted
+        data1 = listone[0]
+        data2 = listone[1]
         fitted = self.fit(data1) #chiedo la media delgi incrementi della prima lista e la salvo in fitted
         predicted = self.media_incrementi(data2) #chiedo la media delgi incrementi della seconda lista e la salvo in predicted
         return (data2[-1] + (fitted + predicted)/2) #faccio la media aritmetica delle due medie incrementi e la aggiungo alle vendite dell'ultimo mese
+
+        
+# test all
+increment_model = FitIncrementModel()
+risultato = increment_model.predict([8, 19, 31, 41, 50, 52, 60])
+
+print('{}'.format(risultato))
