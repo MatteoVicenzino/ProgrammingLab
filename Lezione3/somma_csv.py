@@ -14,7 +14,7 @@ def sum_csv(file_name):
         return None
     return somma
 
-# risultato = sum_csv('shampoo_sales.csv')
-# print('{}'.format(risultato))
+#risultato = sum_csv('shampoo_sales.csv')
+#print('{}'.format(risultato))
 
 # per passare un file come argomento di una funzione devo mettere il nome tra apostrofi nelle chiamata
