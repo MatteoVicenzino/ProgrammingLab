@@ -45,9 +45,9 @@ class IncrementModel(Model):
         lunghezza = len(data)
         errore_medio = 0;
         count = 0; #conta le iterazioni fatte
-        for i in range(lunghezza - 4):
+        for i in range(lunghezza - (window + 1)):
             predizione = self.predict([data[i], data[i+1], data[i+2]])
-            errore = data[i+4] - predizione
+            errore = data[i+3] - predizione
             count = count+1
             if errore < 0:
                 errore_medio = errore_medio - errore
@@ -75,7 +75,7 @@ class FitIncrementModel(IncrementModel):
         count = 0; #conta le iterazioni fatte
         for i in range(lunghezza - 4):
             predizione = self.predict(data_fit ,[data[i], data[i+1], data[i+2]])
-            errore = data[i+4] - predizione
+            errore = data[i+3] - predizione
             count = count+1
             if errore < 0:
                 errore_medio = errore_medio - errore

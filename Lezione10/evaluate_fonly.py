@@ -43,6 +43,7 @@ class IncrementModel(Model):
 
     def evaluate(self, data, window):
         lunghezza = len(data)
+        print('lunghezza di data_evaluate: {}, -4 = data[{}]'.format(lunghezza, lunghezza - 4))
         errore_medio = 0;
         count = 0; #conta le iterazioni fatte
         for i in range(lunghezza - 3):
