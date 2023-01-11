@@ -75,7 +75,7 @@ class FitIncrementModel(IncrementModel):
         count = 0; #conta le iterazioni fatte
         for i in range(lunghezza - 4):
             predizione = self.predict(data_fit ,[data[i], data[i+1], data[i+2]])
-            errore = data[i+3] - predizione
+            errore = data[i+4] - predizione
             count = count+1
             if errore < 0:
                 errore_medio = errore_medio - errore

@@ -130,5 +130,5 @@ print('errore medio senza fit: {}'.format(risultato_i))
 
 increment_model_fit = FitIncrementModel()
 risultato_f = increment_model_fit.evaluate(data_fit, data_evaluate, 3)
-#print('errore medio con fit: {}'.format(risultato_f))
+print('errore medio con fit: {}'.format(risultato_f))
 
