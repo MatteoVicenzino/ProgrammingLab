@@ -1,3 +1,6 @@
+class ExamException(Exception):
+        pass
+
 class Average():
     
     def mat_average(self, list):
