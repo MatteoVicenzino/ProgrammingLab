@@ -23,7 +23,7 @@ class MovingAverage(Average):
 
     def compute(self, lista):
 
-        #controlli su list
+        #controlli su lista
         if (lista == None) or (lista == []):
             raise ExamException('lista non definita')
         if type(lista) is not list:
@@ -33,9 +33,9 @@ class MovingAverage(Average):
         for item in lista:
             if (type(item) is not int) and (type(item) is not float):
                 raise ExamException('gli elementi delle lista devono essere numeri')
-
         if self.window > len(lista):
             raise ExamException('la finestra è più grande della lista')
+
         
         result_list = [] #lista dei risultati che ritornerò
         lunghezza = len(lista) - (self.window - 1)
