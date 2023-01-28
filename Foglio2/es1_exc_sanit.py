@@ -36,23 +36,18 @@ class Automa():
 def esegui(automa, capo):
     
     if capo == "biancheria":
-        print("mi metto la biancheria")
         return(automa.biancheria())
 
     if capo == "calzini":
-        print("mi metto i calzini")
         return(automa.calzini())
 
     if capo == "maglia":
-        print("mi metto la maglia")
         return(automa.maglia())
 
     if capo == "pantaloni":
-        print("mi metto i pantaloni")
         return(automa.pantaloni())
 
     if capo == "calzatura":
-        print("mi metto le calzature")
         return(automa.calzatura())
         
     
@@ -74,8 +69,10 @@ while vestito != True:
     
     try: #provo a vestire il capo selezionato
         done = esegui(automa, capo)
-        if done == 0:
-            raise Exception("l'automa non è riuscito a mettersi {}".format(capo))
+        if done == 1:
+            print("{} indossato correttamente".format(capo))
+        else:
+            raise Exception("l'automa non è riuscito ad indossare {}".format(capo))
     except Exception as e: #se esegui non va a buon fine
         print("Problema hardware: {}".format(e))
     #tolgo il capo dalla lista per non tornare a sceglierlo casualmente
@@ -86,5 +83,5 @@ while vestito != True:
     #non ci sono più capi da mettere, l'automa si è messo tutto
     if len(lista_capi)<1:
         vestito = True
-        print("automa vestito correttamente")
+        print("Automa vestito correttamente")
     
