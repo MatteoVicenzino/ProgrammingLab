@@ -31,6 +31,7 @@ class Automa():
         return 1
 
 
+        
 #funzione esegui: gli dici che capo mettere e veste quel capo
 #ritornano ciò che ritorna il metodo chiamato
 def esegui(automa, capo):
