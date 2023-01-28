@@ -61,22 +61,40 @@ automa = Automa()
 while vestito != True:
     capo = random.choice(lista_capi)
 
-    # (G1) gestire in caso il capo selezionato va contro la sequenza della procedura
-    #if(order_check(capo) != True):
-    #so che l'ordine è giusto, sennò non faccio nemmeno quello che segue:
-
-
+    #(G1) gestire in caso il capo selezionato va contro la sequenza della procedura
+    ordine = False
+    if capo == "biancheria": #contenuti: / NON: pantaloni, calzatura
+        if ("pantaloni" in lista_capi) and ("calzatura" in lista_capi):
+            ordine = True
+        
+    if capo == "calzini": #contenuti / NON: calzatura
+        if "calzatura" in lista_capi:
+            ordine = True
+        
+    if capo == "maglia": #contenuti / NON: /
+        ordine = True
     
-    try: #provo a vestire il capo selezionato
-        done = esegui(automa, capo)
-        if done == 1:
-            print("{} indossato correttamente".format(capo))
-        else:
-            raise Exception("l'automa non è riuscito ad indossare {}".format(capo))
-    except Exception as e: #se esegui non va a buon fine
-        print("Problema hardware: {}".format(e))
-    #tolgo il capo dalla lista per non tornare a sceglierlo casualmente
-    lista_capi.remove(capo)    
+    if capo == "pantaloni": #contenuti biancheria NON: calzatura
+        if ("biancheria" not in lista_capi) and ("calzatura" in lista_capi):
+            ordine = True
+        
+    if capo == "calzatura": #contenuti calzini, pantaloni, biancheria NON: /
+        if ("calzini" not in lista_capi) and ("pantaloni" not in lista_capi) and ("biancheria" not in lista_capi):
+            ordine = True
+
+        
+    if(ordine == True):
+    
+        try: #provo a vestire il capo selezionato
+            done = esegui(automa, capo)
+            if done == 1:
+                print("{} indossato correttamente".format(capo))
+            else:
+                raise Exception("l'automa non è riuscito ad indossare {}".format(capo))
+        except Exception as e: #se esegui non va a buon fine
+            print("Problema hardware: {}".format(e))
+        #tolgo il capo dalla lista per non tornare a sceglierlo casualmente
+        lista_capi.remove(capo)
     
 
     #vestito diventa true quando:
