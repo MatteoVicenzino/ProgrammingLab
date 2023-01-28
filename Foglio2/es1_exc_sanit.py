@@ -20,7 +20,7 @@ class Automa():
         
     def maglia(self):
         self.maglia = True
-        return 1
+        return 0
         
     def pantaloni(self):
         self.pantaloni = True
@@ -68,30 +68,23 @@ while vestito != True:
 
     # (G1) gestire in caso il capo selezionato va contro la sequenza della procedura
     #if(order_check(capo) != True):
+    #so che l'ordine è giusto, sennò non faccio nemmeno quello che segue:
+
+
     
     try: #provo a vestire il capo selezionato
         done = esegui(automa, capo)
-
-        if done == 1: #se il capo è stato indossato
-            #tolgo il capo dalla lista per non tornare a sceglierlo casualmente
-            lista_capi.remove(capo)
-        else: #se invece il capo NON è stato indossato
-            #gestisco il caso G2 in cui l'automa non riesce a vestirsi e ritorna 0
-            raise Exception("L'automa non è riuscito a mettersi capo {} per un problema hardware. ".format(capo))
-        
-            
-        
+        if done == 0:
+            raise Exception("l'automa non è riuscito a mettersi {}".format(capo))
     except Exception as e: #se esegui non va a buon fine
-        print("L'automa non è riuscito a mettersi capo {} per un problema software di tipo {}. ".format(capo, e))
-
+        print("Problema hardware: {}".format(e))
+    #tolgo il capo dalla lista per non tornare a sceglierlo casualmente
+    lista_capi.remove(capo)    
+    
 
     #vestito diventa true quando:
-    #1 non ci sono più capi da mettere, l'automa si è messo tutto
+    #non ci sono più capi da mettere, l'automa si è messo tutto
     if len(lista_capi)<1:
         vestito = True
         print("automa vestito correttamente")
     
-
-    
-
-
