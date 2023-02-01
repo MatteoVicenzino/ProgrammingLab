@@ -1,4 +1,4 @@
-class ExamExceptio(Exception):
+class ExamException(Exception):
     pass
 
 #classe CSVFile vista a lezione
@@ -83,3 +83,9 @@ print('\n')
 
 differenze = compute_daily_max_difference(time_series)
 print(differenze)
+
+
+
+
+
+
