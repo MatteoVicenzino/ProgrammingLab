@@ -93,3 +93,12 @@ def compute_daily_max_difference(time_series):
             escursione_termica = max(lista_giornate[i]) - min(lista_giornate[i])
             differenze.append(escursione_termica)
     return differenze
+
+
+
+time_series_file = CSVTimeSeriesFile(name='test_data.csv')
+time_series = time_series_file.get_data()
+differenze = compute_daily_max_difference(time_series)
+
+for item in differenze:
+    print(item)
