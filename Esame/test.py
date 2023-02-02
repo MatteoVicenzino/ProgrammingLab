@@ -20,20 +20,20 @@ class CSVTimeSeriesFile(CSVFile):
             my_file.readline()
             my_file.close() #per resettare conto righe
         except Exception as e:
-            raise ExamException('Errore: file non leggibile o vuoto')
+            raise ExamException('Errore: file non leggibile o vuoto, {}'.format(e))
 
         my_file = open(self.name, 'r')
         lista_di_liste = [] #creo lista vuotra che accoglierà le liste annidate
         for line in my_file:
             lista_annidata = line.strip('\n').split(',')
-            if lista_annidata[0] != 'epoch': # salto intestazione tabella
+            if lista_annidata[0] != 'epoch': #salto intestazione tabella
                 try:
                     #Converto silenziosamente gli epoch float in int
                     #stringa->float->int, perché non posso convertire
                     #stringa '12.5' -> int, non rappresenta un int
                     lista_annidata[0] = int(float(lista_annidata[0]))
                     lista_annidata[1] = float(lista_annidata[1])
-                except Exception as e:
+                except:
                     #se epoch o temperatura non contengono valori numerici
                     #la conversione a float non andrà a buon fine
                     #quindi ignoro quella riga
@@ -47,7 +47,6 @@ class CSVTimeSeriesFile(CSVFile):
 
         my_file.close()
         return lista_di_liste
-
 
 
 def day_arrangement(time_series):
@@ -75,6 +74,8 @@ def day_arrangement(time_series):
 
 def compute_daily_max_difference(time_series):
 
+    if type(time_series) is not list: #controllo su input
+        raise ExamException('Errore: l\'argomento deve essere una lista')
     #converto gli epoch da secondi in giorni
     for item in time_series:
         coppia = item
@@ -98,10 +99,8 @@ def compute_daily_max_difference(time_series):
     return differenze
 
 
-time_series_file = CSVTimeSeriesFile(name='test_data_c.csv')
+time_series_file = CSVTimeSeriesFile(name='test_data.csv')
 time_series = time_series_file.get_data()
+differenze = compute_daily_max_difference(time_series)
 
-differenze = compute_daily_max_difference([[100, -4.35], [1675077364, 25.30], [1675077387, 27.24]])
-
-for item in differenze:
-    print(item)
+print(differenze)
