@@ -18,9 +18,11 @@ class CSVTimeSeriesFile(CSVFile):
         #controllo se è leggibile
         try:
             my_file.readline()
+            my_file.close() #per resettare conto righe
         except Exception as e:
             raise ExamException('Errore: file non leggibile o vuoto')
-            
+
+        my_file = open(self.name, 'r')
         lista_di_liste = [] #creo lista vuotra che accoglierà le liste annidate
         for line in my_file:
             lista_annidata = line.strip('\n').split(',')
@@ -43,6 +45,7 @@ class CSVTimeSeriesFile(CSVFile):
             if lista_di_liste[i+1][0] <= lista_di_liste[i][0]:
                 raise ExamException('Errore: lista non ordinata o timestamp duplicato')
 
+        my_file.close()
         return lista_di_liste
 
 
@@ -86,7 +89,7 @@ def compute_daily_max_difference(time_series):
     
     differenze = [] #lista delle differenze che ritornerò alla fine
     for i in range(len(lista_giornate)):
-        if len(lista_giornate[i]) < 1: 
+        if len(lista_giornate[i]) <= 1: 
             #Se non c'è almeno una misurazione per giorno, la differenza di quel giorno sarà None
             differenze.append(None)
         else:
